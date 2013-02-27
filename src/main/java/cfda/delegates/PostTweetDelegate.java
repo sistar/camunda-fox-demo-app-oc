@@ -17,5 +17,6 @@ public class PostTweetDelegate implements JavaDelegate{
     public void execute(DelegateExecution execution) throws Exception {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("i am called by bpm");
+        execution.setVariable("tweet-result","ok");
     }
 }
