@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<process-archives>
-    <process-archive>
-        <configuration>
-            <!-- processes should be kept in the engine when process archive is undeployed -->
-            <undeployment delete="false"/>
-        </configuration>
+<process-application
+        xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
+        >
+
+    <process-archive name="twitter-posting">
+        <process-engine>default</process-engine>
+        <properties>
+            <property name="isDeleteUponUndeploy">false</property>
+            <property name="isScanForProcessDefinitions">true</property>
+        </properties>
     </process-archive>
-</process-archives>
+
+</process-application>

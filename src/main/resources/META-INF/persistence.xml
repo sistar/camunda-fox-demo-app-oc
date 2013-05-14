@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="wasabiPU">
+        <description>PersistenceUnit für das die Demo Prozesse</description>
+        <jta-data-source>java:jboss/datasources/ProcessEngine</jta-data-source>
+
+        <!-- Audit -->
+        <class>cfda.AuditPost</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
