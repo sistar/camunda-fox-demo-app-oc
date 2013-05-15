@@ -1,6 +1,7 @@
 package cfda.process.integration;
 
 import cfda.util.LogFactory;
+import cfda.util.MockEl;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
@@ -39,7 +40,10 @@ public class CommonsModulesBase {
         // MavenResolutionFilter filter = new ScopeFilter("compile");
         // Collection<JavaArchive> javaArchives = resolver().resolveAs(JavaArchive.class, filter);
         return target
-                .addAsResource("META-INF/beans.xml")
+                .addAsWebResource("META-INF/beans.xml","WEB-INF/beans.xml")
+                .addAsResource("META-INF/services/javax.enterprise.inject.spi.Extension")
+                .addClass(PreferMocksForElExtension.class)
+                .addClass(MockEl.class)
                 .addClass(LogFactory.class)
                 .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
                 .addAsLibraries(resolver().artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())

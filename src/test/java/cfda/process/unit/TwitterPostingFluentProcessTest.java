@@ -15,6 +15,8 @@ import static cfda.process.test.C.*;
 import static org.camunda.bpm.engine.test.fluent.FluentProcessEngineTests.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @Category(UnitTest.class)
 public class TwitterPostingFluentProcessTest  {
@@ -34,10 +36,10 @@ public class TwitterPostingFluentProcessTest  {
                 postTweetDelegate).execute(
                 any(DelegateExecution.class));
 
-        newProcessInstance(TWITTER_POSTING_PROCESS);
+        newProcessInstance(TWITTER_POSTING_PROCESS).start();
 
-        //verify(postTweetDelegateB).execute(any(DelegateExecution.class));
 
+        verify(postTweetDelegate,times(1)).execute(any(DelegateExecution.class));
         assertThat(processInstance().getVariable(TWEET_RESULT)).exists().isDefined().asString().isEqualTo("ok");
 
         assertThat(processInstance()).isWaitingAt(APPROVE_TWEET_USER_TASK);
